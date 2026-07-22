@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Excel Staffing Gantt</title>
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <style>
@@ -12,7 +12,7 @@
 *{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
 .wrap{max-width:1360px;margin:0 auto;padding:22px}.hero{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}.hero h1{margin:0 0 8px;font-size:28px}.hero p{margin:0;color:var(--muted);line-height:1.45;max-width:820px}.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{padding:8px 12px;border:1px solid var(--line);background:#fff;border-radius:999px;font-size:12px;font-weight:700}
 .layout{display:grid;grid-template-columns:310px 1fr;gap:18px}.layout.single{grid-template-columns:1fr}.card{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 8px 24px rgba(0,0,0,.28)}.card h2,.card h3{margin:0 0 12px}.small{font-size:13px;color:var(--muted);line-height:1.45}.stack{display:flex;flex-direction:column;gap:12px}.step{display:grid;grid-template-columns:32px 1fr;gap:10px;padding:10px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03)}.num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--brand);color:#fff;font-weight:800;font-size:12px}
-.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.btn{border:none;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}.btn.primary{background:var(--brand);color:#fff}.btn.secondary{background:#182249;border:1px solid var(--line);color:var(--text)}.btn.ghost{background:#111a3a;border:1px dashed var(--line);color:var(--muted)}.btn:disabled{opacity:.55;cursor:not-allowed}.dropzone{border:2px dashed #44518b;border-radius:16px;padding:18px;background:linear-gradient(180deg,#0f1838,#10182e);transition:.18s ease}.dropzone.dragover{border-color:var(--brand);background:linear-gradient(180deg,#16204c,#10182e)}.hiddenInput{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}.filters{display:grid;grid-template-columns:minmax(260px,420px);gap:12px}.pill{padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:#182249;font-size:12px;color:var(--muted);font-weight:700}.toolbarWrap{display:grid;grid-template-columns:1fr 1fr;gap:12px}.printHint{font-size:12px;color:var(--muted);margin-top:8px}.queueTag{display:inline-flex;align-items:center;gap:6px;padding:3px 8px;border-radius:999px;background:#17214a;color:#c9d4fb;font-size:11px;font-weight:700;margin-top:4px}input[type=file],select,input[type=password]{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#0d1531;color:var(--text)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.btn{border:none;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}.btn.primary{background:var(--brand);color:#fff}.btn.secondary{background:#182249;border:1px solid var(--line);color:var(--text)}.btn.ghost{background:#111a3a;border:1px dashed var(--line);color:var(--muted)}.btn:disabled{opacity:.55;cursor:not-allowed}.dropzone{border:2px dashed #44518b;border-radius:16px;padding:18px;background:linear-gradient(180deg,#0f1838,#10182e);transition:.18s ease}.dropzone.dragover{border-color:var(--brand);background:linear-gradient(180deg,#16204c,#10182e)}.hiddenInput{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}.filters{display:grid;grid-template-columns:repeat(2,minmax(220px,1fr));gap:12px}.pill{padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:#182249;font-size:12px;color:var(--muted);font-weight:700}.toolbarWrap{display:grid;grid-template-columns:1fr 1fr;gap:12px}.printHint{font-size:12px;color:var(--muted);margin-top:8px}.queueTag{display:inline-flex;align-items:center;gap:6px;padding:3px 8px;border-radius:999px;background:#17214a;color:#c9d4fb;font-size:11px;font-weight:700;margin-top:4px}input[type=file],select,input[type=password]{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#0d1531;color:var(--text)}
 label{font-size:12px;font-weight:700;color:var(--muted);display:block;margin-bottom:6px}.grid2,.grid3{display:grid;gap:12px}.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .metric{padding:12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03)}.metric .k{font-size:12px;color:var(--muted);margin-bottom:4px}.metric .v{font-size:24px;font-weight:800}.ok{color:var(--ok)}.warn{color:var(--warn)}.err{color:var(--err)}
 .notice{padding:10px 12px;border-radius:12px;background:#121c40;border:1px solid var(--line);font-size:13px;color:var(--muted)}
@@ -108,10 +108,10 @@ details{border:1px solid var(--line);border-radius:12px;overflow:hidden}summary{
           <div>
             <label>Export</label>
             <div class="row">
-              <button class="btn secondary" id="exportDayPngBtn">Day PNG</button>
               <button class="btn secondary" id="exportDayPdfBtn">Day PDF</button>
-              <button class="btn secondary" id="exportWeekPngBtn">Week PNG</button>
+              <button class="btn primary" id="exportDayXlsxBtn">Day Excel</button>
               <button class="btn secondary" id="exportWeekPdfBtn">Week PDF</button>
+              <button class="btn primary" id="exportWeekXlsxBtn">Week Excel</button>
             </div>
 
           </div>
@@ -120,6 +120,10 @@ details{border:1px solid var(--line);border-radius:12px;overflow:hidden}summary{
           <div>
             <label for="employeeFilter">Employee filter</label>
             <select id="employeeFilter"><option value="">All employees</option></select>
+          </div>
+          <div>
+            <label for="queueFilter">Queue filter</label>
+            <select id="queueFilter"><option value="">All queues</option></select>
           </div>
         </div>
         <div class="footer">Current selection: <span id="currentSelection">No data</span></div>
@@ -144,7 +148,7 @@ const CONFIG={mappingPassword:'opslock',snap:15,weekday:{start:360,end:1200},wee
 const DAYS=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 const REQUIRED=[
   {id:'agent',label:'Agent Name',required:true},
-  {id:'queue',label:'Queue',required:false},
+  {id:'queue',label:'Queue',required:true},
   {id:'day',label:'Day',required:true},
   {id:'shiftStart',label:'Shift Start',required:true},
   {id:'shiftEnd',label:'Shift End',required:true},
@@ -155,10 +159,10 @@ const REQUIRED=[
   {id:'break2Start',label:'Break 2 Start',required:false},
   {id:'break2End',label:'Break 2 End',required:false}
 ];
-const state={workbook:null,sheetNames:[],sheetName:'',rowsRaw:[],headers:[],mapping:{},rows:[],warnings:[],errors:[],viewMode:'day',currentDay:'Monday',mappingUnlocked:false,filters:{employee:''}};
+const state={workbook:null,sheetNames:[],sheetName:'',rowsRaw:[],headers:[],mapping:{},rows:[],warnings:[],errors:[],viewMode:'day',currentDay:'Monday',mappingUnlocked:false,filters:{employee:'',queue:''}};
 
 const $=id=>document.getElementById(id);
-const els={fileInput:$('fileInput'),sheetSelect:$('sheetSelect'),fileStatus:$('fileStatus'),validCount:$('validCount'),warnCount:$('warnCount'),errorCount:$('errorCount'),validationNotes:$('validationNotes'),mappingGrid:$('mappingGrid'),mappingPane:$('mappingPane'),mappingSummary:$('mappingSummary'),mappingLockMsg:$('mappingLockMsg'),passwordInput:$('passwordInput'),unlockBtn:$('unlockBtn'),relockBtn:$('relockBtn'),dayTabs:$('dayTabs'),renderHost:$('renderHost'),hoursText:$('hoursText'),currentSelection:$('currentSelection'),dropZone:$('dropZone'),browseBtn:$('browseBtn'),employeeFilter:$('employeeFilter')};
+const els={fileInput:$('fileInput'),sheetSelect:$('sheetSelect'),fileStatus:$('fileStatus'),validCount:$('validCount'),warnCount:$('warnCount'),errorCount:$('errorCount'),validationNotes:$('validationNotes'),mappingGrid:$('mappingGrid'),mappingPane:$('mappingPane'),mappingSummary:$('mappingSummary'),mappingLockMsg:$('mappingLockMsg'),passwordInput:$('passwordInput'),unlockBtn:$('unlockBtn'),relockBtn:$('relockBtn'),dayTabs:$('dayTabs'),renderHost:$('renderHost'),hoursText:$('hoursText'),currentSelection:$('currentSelection'),dropZone:$('dropZone'),browseBtn:$('browseBtn'),employeeFilter:$('employeeFilter'),queueFilter:$('queueFilter')};
 
 function sanitize(s){return String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'');}
 function getHours(day){return ['Saturday','Sunday'].includes(day)?CONFIG.weekend:CONFIG.weekday;}
@@ -177,7 +181,7 @@ function parseTime(v){
 function defaultMapping(headers){
   const out={};
   const tests={
-    agent:[/agentname/,/agent/,/employee/,/name/], queue:[/queue/,/skill/,/team/,/lineofbusiness/,/lob/], day:[/weekday/,/^day$/,/(work)?date/], shiftStart:[/shiftstart/,/^start$/, /starttime/], shiftEnd:[/shiftend/,/^end$/, /endtime/],
+    agent:[/agentname/,/agent/,/employee/,/name/], queue:[/schedulegroup/,/queue/,/skill/,/team/,/lineofbusiness/,/lob/], day:[/weekday/,/^day$/,/(work)?date/], shiftStart:[/shiftstart/,/^start$/, /starttime/], shiftEnd:[/shiftend/,/^end$/, /endtime/],
     lunchStart:[/lunchstart/,/mealstart/], lunchEnd:[/lunchend/,/mealend/], break1Start:[/break1start/,/pause1start/,/breakstart1/], break1End:[/break1end/,/pause1end/,/breakend1/],
     break2Start:[/break2start/,/pause2start/,/breakstart2/], break2End:[/break2end/,/pause2end/,/breakend2/]
   };
@@ -213,7 +217,7 @@ function processRows(){
   state.rowsRaw.forEach((r,idx)=>{
     const agent=String(r[m.agent]??'').trim(); const queue=String(m.queue ? (r[m.queue] ?? '') : '').trim(); const day=normDay(r[m.day]);
     const ss=snap(parseTime(r[m.shiftStart]),'start'); const se=snap(parseTime(r[m.shiftEnd]),'end');
-    if(!agent||!day||!DAYS.includes(day)||ss==null||se==null||se<=ss){ state.errors.push(`Row ${idx+2}: missing or invalid core fields.`); return; }
+    if(!agent||!queue||!day||!DAYS.includes(day)||ss==null||se==null||se<=ss){ state.errors.push(`Row ${idx+2}: missing or invalid core fields (Agent Name, Schedule Group, Day, Shift Start, Shift End are required).`); return; }
     const row={agent,queue,day,shiftStart:ss,shiftEnd:se,blocks:[]};
     const pairs=[['Lunch',m.lunchStart,m.lunchEnd,'lunch'],['Break 1',m.break1Start,m.break1End,'break'],['Break 2',m.break2Start,m.break2End,'break']];
     pairs.forEach(([label,sKey,eKey,type])=>{
@@ -264,20 +268,24 @@ function analyzeCoverageIssues(){
   });
 }
 function getFilteredRows(){
-  return state.rows.filter(r=>(!state.filters.employee || r.agent===state.filters.employee));
+  return state.rows.filter(r=>(!state.filters.employee || r.agent===state.filters.employee) && (!state.filters.queue || r.queue===state.filters.queue));
 }
 function populateFilters(){
   const employees=[...new Set(state.rows.map(r=>r.agent))].sort();
-  const eVal=state.filters.employee;
+  const queues=[...new Set(state.rows.map(r=>r.queue).filter(Boolean))].sort();
+  const eVal=state.filters.employee, qVal=state.filters.queue;
   els.employeeFilter.innerHTML='<option value="">All employees</option>'+employees.map(v=>'<option value="'+v.replace(/"/g,'&quot;')+'">'+v+'</option>').join('');
+  els.queueFilter.innerHTML='<option value="">All queues</option>'+queues.map(v=>'<option value="'+v.replace(/"/g,'&quot;')+'">'+v+'</option>').join('');
   els.employeeFilter.value=employees.includes(eVal)?eVal:'';
+  els.queueFilter.value=queues.includes(qVal)?qVal:'';
   state.filters.employee=els.employeeFilter.value;
+  state.filters.queue=els.queueFilter.value;
 }
 function renderStats(){
   els.validCount.textContent=state.rows.length; els.warnCount.textContent=state.warnings.length; els.errorCount.textContent=state.errors.length;
   const parts=[]; if(state.errors.length) parts.push(`<b>${state.errors.length}</b> error(s)`); if(state.warnings.length) parts.push(`<b>${state.warnings.length}</b> warning(s)`);
   els.validationNotes.innerHTML=parts.length?`${parts.join(' and ')} detected. ${[...state.errors,...state.warnings].slice(0,5).join(' • ')}`:'No validation issues detected.';
-  const filterBits=[state.filters.employee?`Employee: ${state.filters.employee}`:'All employees'];
+  const filterBits=[state.filters.employee?`Employee: ${state.filters.employee}`:'All employees',state.filters.queue?`Queue: ${state.filters.queue}`:'All queues'];
   els.currentSelection.textContent=(state.viewMode==='day'?`Day: ${state.currentDay}`:'Week overview')+` • ${filterBits.join(' • ')}`;
 }
 function blockPct(start,end,range){const s=Math.max(start,range.start),e=Math.min(end,range.end); if(e<=s) return null; const total=range.end-range.start; return {left:((s-range.start)/total)*100,width:((e-s)/total)*100};}
@@ -362,7 +370,7 @@ function renderChart(){
   els.renderHost.innerHTML='';
   const rows=getFilteredRows();
   if(!state.rows.length){ els.hoursText.textContent='Load a workbook to render the chart.'; els.renderHost.innerHTML='<div class="empty">No schedule data loaded.</div>'; return; }
-  if(!rows.length){ els.hoursText.textContent='No rows match the current employee filter.'; els.renderHost.innerHTML='<div class="empty">No schedule rows match the selected employee filter.</div>'; return; }
+  if(!rows.length){ els.hoursText.textContent='No rows match the current filters.'; els.renderHost.innerHTML='<div class="empty">No schedule rows match the selected filters.</div>'; return; }
   if(state.viewMode==='day'){ if(!rows.some(r=>r.day===state.currentDay)){ state.currentDay=DAYS.find(d=>rows.some(r=>r.day===d))||state.currentDay; } const section=buildDaySection(state.currentDay); els.renderHost.appendChild(section); const h=getHours(state.currentDay); els.hoursText.textContent=`${state.currentDay}: ${fmt(h.start)} to ${fmt(h.end)} • 15-minute increments`; }
   else { DAYS.filter(d=>rows.some(r=>r.day===d)).forEach(day=>els.renderHost.appendChild(buildDaySection(day))); els.hoursText.textContent='Week overview across all days in the selected worksheet.'; }
 }
@@ -394,8 +402,107 @@ function downloadIssues(fmt){
     const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=`gantt_issues_${stamp}.csv`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
   }
 }
+function buildDayGridForExcel(day){
+  const range=getHours(day);
+  const rows=getFilteredRows().filter(r=>r.day===day).sort((a,b)=>a.shiftStart-b.shiftStart||a.agent.localeCompare(b.agent));
+  const slotCount=(range.end-range.start)/CONFIG.snap;
+  const timeHeaders=[]; for(let i=0;i<slotCount;i++){ timeHeaders.push(fmt(range.start+i*CONFIG.snap)); }
+  const header=['Agent Name','Queue','Day','Shift Start','Shift End','Scheduled Hours',...timeHeaders];
+  const grid=[header];
+  rows.forEach(r=>{
+    const rowArr=[r.agent,r.queue||'',r.day,fmt(r.shiftStart),fmt(r.shiftEnd),((r.shiftEnd-r.shiftStart)/60).toFixed(2)];
+    for(let i=0;i<slotCount;i++){
+      const t=range.start+i*CONFIG.snap;
+      if(t<r.shiftStart||t>=r.shiftEnd){ rowArr.push(''); continue; }
+      const block=r.blocks.find(b=>b.start<=t && b.end>t);
+      if(block){ rowArr.push(block.type==='lunch'?'Lunch':block.label); }
+      else { rowArr.push('Shift'); }
+    }
+    grid.push(rowArr);
+  });
+  const summary=['Sum of employees','','','','','Available'];
+  for(let i=0;i<slotCount;i++){
+    summary.push(countActiveAgentsAt(rows,range.start+i*CONFIG.snap));
+  }
+  grid.push([]); grid.push(summary);
+  return {grid,slotCount,rowsInBody:rows.length};
+}
+function styleExcelSheet(ws,slotCount,rowsInBody){
+  const range=XLSX.utils.decode_range(ws['!ref']);
+  const cols=[];
+  cols.push({wch:22}); cols.push({wch:16}); cols.push({wch:11}); cols.push({wch:11}); cols.push({wch:11}); cols.push({wch:14});
+  for(let i=0;i<slotCount;i++) cols.push({wch:9});
+  ws['!cols']=cols;
+  const rows=[]; rows.push({hpt:20});
+  for(let i=0;i<rowsInBody;i++) rows.push({hpt:20});
+  ws['!rows']=rows;
+  const headerStyle={fill:{fgColor:{rgb:'FF101A3D'}},font:{color:{rgb:'FFEDF2FF'},bold:true,sz:11},alignment:{horizontal:'center',vertical:'center',wrapText:true},border:{top:{style:'thin',color:{rgb:'FF2A355F'}},bottom:{style:'thin',color:{rgb:'FF2A355F'}},left:{style:'thin',color:{rgb:'FF2A355F'}},right:{style:'thin',color:{rgb:'FF2A355F'}}}};
+  const shiftStyle={fill:{fgColor:{rgb:'FF7C4DFF'}},font:{color:{rgb:'FFFFFFFF'},bold:true,sz:10},alignment:{horizontal:'center',vertical:'center'},border:headerStyle.border};
+  const lunchStyle={fill:{fgColor:{rgb:'FFF0B34B'}},font:{color:{rgb:'FF1D1605'},bold:true,sz:10},alignment:{horizontal:'center',vertical:'center'},border:headerStyle.border};
+  const breakStyle={fill:{fgColor:{rgb:'FFFF6F7D'}},font:{color:{rgb:'FFFFFFFF'},bold:true,sz:10},alignment:{horizontal:'center',vertical:'center'},border:headerStyle.border};
+  const summaryStyle={fill:{fgColor:{rgb:'FF0F1838'}},font:{color:{rgb:'FFEDF2FF'},bold:true,sz:11},alignment:{horizontal:'center',vertical:'center'},border:headerStyle.border};
+  const labelStyle={font:{bold:true,sz:11},alignment:{vertical:'center'},border:headerStyle.border};
+  for(let R=range.s.r; R<=range.e.r; R++){
+    for(let C=range.s.c; C<=range.e.c; C++){
+      const addr=XLSX.utils.encode_cell({r:R,c:C});
+      const cell=ws[addr]; if(!cell) continue;
+      if(R===0){ cell.s=headerStyle; continue; }
+      if(R===range.e.r && cell.v!==undefined && cell.v!==''){ cell.s=summaryStyle; continue; }
+      if(C<6){ cell.s=labelStyle; continue; }
+      const v=String(cell.v||'').toLowerCase();
+      if(v==='shift') cell.s=shiftStyle;
+      else if(v==='lunch') cell.s=lunchStyle;
+      else if(v.startsWith('break')) cell.s=breakStyle;
+      else cell.s={border:headerStyle.border};
+    }
+  }
+  ws['!freeze']={xSplit:6,ySplit:1};
+  ws['!autofilter']={ref:XLSX.utils.encode_range({s:{r:0,c:0},e:{r:0,c:5}})};
+}
+function exportDayToExcel(day){
+  if(!state.rows.length){ alert('Load a workbook first.'); return; }
+  const {grid,slotCount,rowsInBody}=buildDayGridForExcel(day);
+  const wb=XLSX.utils.book_new();
+  const ws=XLSX.utils.aoa_to_sheet(grid);
+  styleExcelSheet(ws,slotCount,rowsInBody);
+  XLSX.utils.book_append_sheet(wb,ws,day.slice(0,31));
+  XLSX.writeFile(wb,`gantt_${day.toLowerCase()}.xlsx`,{cellStyles:true});
+}
+function exportWeekToExcel(){
+  if(!state.rows.length){ alert('Load a workbook first.'); return; }
+  const wb=XLSX.utils.book_new();
+  const activeDays=DAYS.filter(d=>getFilteredRows().some(r=>r.day===d));
+  if(!activeDays.length){ alert('No days available to export.'); return; }
+  activeDays.forEach(day=>{
+    const {grid,slotCount,rowsInBody}=buildDayGridForExcel(day);
+    const ws=XLSX.utils.aoa_to_sheet(grid);
+    styleExcelSheet(ws,slotCount,rowsInBody);
+    XLSX.utils.book_append_sheet(wb,ws,day.slice(0,31));
+  });
+  const summaryGrid=[['Day','Queues','Peak','Average','Low','Uncovered quarter hours','Under-staffed quarter hours']];
+  activeDays.forEach(day=>{
+    const range=getHours(day);
+    const rows=getFilteredRows().filter(r=>r.day===day);
+    const counts=[];
+    for(let t=range.start; t<range.end; t+=CONFIG.snap){ counts.push(countActiveAgentsAt(rows,t)); }
+    const peak=counts.length?Math.max(...counts):0;
+    const low=counts.length?Math.min(...counts):0;
+    const avg=counts.length?(counts.reduce((a,b)=>a+b,0)/counts.length).toFixed(2):0;
+    const uncovered=counts.filter(c=>c===0).length;
+    const under=counts.filter(c=>c>0&&c<CONFIG.warningAgentThreshold).length;
+    const queues=[...new Set(rows.map(r=>r.queue).filter(Boolean))].sort().join(', ');
+    summaryGrid.push([day,queues,peak,Number(avg),low,uncovered,under]);
+  });
+  const summaryWs=XLSX.utils.aoa_to_sheet(summaryGrid);
+  summaryWs['!cols']=[{wch:14},{wch:26},{wch:8},{wch:10},{wch:8},{wch:24},{wch:26}];
+  const headerStyle={fill:{fgColor:{rgb:'FF101A3D'}},font:{color:{rgb:'FFEDF2FF'},bold:true,sz:11},alignment:{horizontal:'center',vertical:'center'}};
+  const range=XLSX.utils.decode_range(summaryWs['!ref']);
+  for(let C=range.s.c; C<=range.e.c; C++){ const addr=XLSX.utils.encode_cell({r:0,c:C}); if(summaryWs[addr]) summaryWs[addr].s=headerStyle; }
+  XLSX.utils.book_append_sheet(wb,summaryWs,'Week Summary');
+  XLSX.writeFile(wb,'gantt_week.xlsx',{cellStyles:true});
+}
 function downloadTemplate(){
-  const template=[{'Agent Name':'Ava','Queue':'Sales','Day':'Monday','Shift Start':'6:00 AM','Shift End':'2:30 PM','Lunch Start':'10:00 AM','Lunch End':'10:30 AM','Break 1 Start':'8:15 AM','Break 1 End':'8:30 AM','Break 2 Start':'12:15 PM','Break 2 End':'12:30 PM'}];
+  const template=[{'Agent Name':'Ava','Schedule Group':'Sales','Day':'Monday','Shift Start':'6:00 AM','Shift End':'2:30 PM','Lunch Start':'10:00 AM','Lunch End':'10:30 AM','Break 1 Start':'8:15 AM','Break 1 End':'8:30 AM','Break 2 Start':'12:15 PM','Break 2 End':'12:30 PM'}];
   const ws=XLSX.utils.json_to_sheet(template); const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,'Template'); XLSX.writeFile(wb,'staffing_gantt_template.xlsx');
 }
 els.fileInput.addEventListener('change',async e=>{ const file=e.target.files?.[0]; if(!file) return; await loadWorkbookFile(file); });
@@ -413,9 +520,10 @@ $('applyMappingBtn').onclick=()=>{ getMappingFromUI(); processRows(); };
 $('dayModeBtn').onclick=()=>{ state.viewMode='day'; renderStats(); renderTabs(); renderChart(); };
 $('weekModeBtn').onclick=()=>{ state.viewMode='week'; renderStats(); renderTabs(); renderChart(); };
 els.employeeFilter.onchange=()=>{ state.filters.employee=els.employeeFilter.value; renderStats(); renderTabs(); renderChart(); };
-$('exportDayPngBtn').onclick=async()=>{ const node=currentDayNode(); if(node) await exportNodeAsPng(node,`gantt_${state.currentDay.toLowerCase()}.png`); };
+els.queueFilter.onchange=()=>{ state.filters.queue=els.queueFilter.value; renderStats(); renderTabs(); renderChart(); };
+$('exportDayXlsxBtn').onclick=()=>exportDayToExcel(state.currentDay);
+$('exportWeekXlsxBtn').onclick=()=>exportWeekToExcel();
 $('exportDayPdfBtn').onclick=async()=>{ const node=currentDayNode(); if(node) await exportNodeAsPdf(node,`gantt_${state.currentDay.toLowerCase()}.pdf`); };
-$('exportWeekPngBtn').onclick=async()=>{ await withWeekView(async()=>{ await exportNodeAsPng(els.renderHost,'gantt_week.png'); }); };
 $('exportWeekPdfBtn').onclick=async()=>{ await withWeekView(async()=>{ await exportNodeAsPdf(els.renderHost,'gantt_week.pdf'); }); };
 setMappingLocked(true);
 </script>
